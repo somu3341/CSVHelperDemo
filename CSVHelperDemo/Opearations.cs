@@ -1,4 +1,5 @@
 ﻿using CsvHelper;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Formats.Asn1;
@@ -32,6 +33,24 @@ namespace CSVHelperDemo
             {
                 csvWriter.WriteRecords(records);
             }
+        }
+        public static void ImplementCSVToJson()
+        {
+            List<Model> records = new List<Model>();
+            string importFilePath = @"D:\BridgeLabs\CSVHelperDemo\CSVHelperDemo\CSVFile.csv";
+            string exportFilePath = @"D:\BridgeLabs\CSVHelperDemo\CSVHelperDemo\JsonFile.json";
+            using (var reader = new StreamReader(importFilePath))
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            {
+                records = csv.GetRecords<Model>().ToList();
+                Console.WriteLine("Reading CSV File");
+                foreach (var item in records)
+                {
+                    Console.WriteLine(item.name + "\n" + item.email + "\n" + item.phone + "\n" + item.country);
+                }
+            }
+            var data = JsonConvert.SerializeObject(records);
+            File.WriteAllText(exportFilePath, data);
         }
     }
 }

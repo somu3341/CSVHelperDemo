@@ -8,14 +8,17 @@ namespace CSVHelperDemo
             bool flag=true;
             while(flag)
             {
-                Console.WriteLine("Enter to Choose Option \n1.Read and Write CSV File\n2.Exit");
+                Console.WriteLine("Enter to Choose Option \n1.Read and Write CSV File\n2.Read and Write CSV to Json File\n3.Exit");
                 int option=Convert.ToInt32(Console.ReadLine());
                 switch (option)
                 {
                     case 1:
                         Opearations.ImplementCSVHandling();
                         break;
-                    case 2:
+                        case 2:
+                        Opearations.ImplementCSVToJson();
+                        break;
+                    case 3:
                         flag = false;
                         break;  
                 }
